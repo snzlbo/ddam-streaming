@@ -11,19 +11,28 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
+import { Avatar, AvatarFallback } from '@/components/ui/avatar'
+import Image from 'next/image'
 
 export function Header() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container mx-auto flex h-16 items-center justify-between px-4">
-        {/* Logo */}
         <div className="flex items-center space-x-4">
           <Button variant="ghost" size="icon" className="md:hidden">
             <Menu className="h-5 w-5" />
           </Button>
-          <div className="flex items-center space-x-2">
-            <div className="h-8 w-8 rounded bg-primary flex items-center justify-center"></div>
+          <div
+            className="flex items-center space-x-2 cursor-pointer"
+            onClick={() => (window.location.href = '/')}
+          >
+            <Image
+              height={32}
+              width={32}
+              src="/logo.svg"
+              alt="Logo"
+              className="h-8 w-8"
+            ></Image>
             <span className="font-bold text-xl hidden sm:inline-block">
               VideoStream
             </span>

@@ -3,10 +3,9 @@ import { NextResponse } from 'next/server'
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url)
   const query = searchParams.get('query') || ''
-  const per_page = searchParams.get('per_page') || '10'
   try {
     const response = await fetch(
-      `https://api.pexels.com/videos/search?query=${query}&per_page=${per_page}`,
+      `https://api.pexels.com/videos/videos/${query}`,
       {
         headers: {
           Authorization: process.env.PEXELS_API_KEY || '',

@@ -128,6 +128,7 @@ const dummies = [
 
 export default function HomePage() {
   const [trendingVideos, setTrendingVideos] = useState<Array<Media | null>>([])
+  const [animeVideos, setAnimeVideos] = useState<Array<Media | null>>([])
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
@@ -154,7 +155,6 @@ export default function HomePage() {
             author: video.user.name,
           })),
         ]
-        console.log('🚀 ~ fetchPexelsMedia ~ combinedMedia:', combinedMedia)
         setTrendingVideos(combinedMedia)
       } catch (error) {
         console.error('Error fetching from Pexels:', error)
@@ -163,8 +163,40 @@ export default function HomePage() {
         setLoading(false)
       }
     }
+    const fetchAnimeMedia = async () => {
+      try {
+        setLoading(true)
+        const query = 'art' // or any dynamic value you want
+        const per_page = 5 // or any dynamic value you want
+        const videosResponse = await fetch(
+          `/api/pexels/videos/search?query=${encodeURIComponent(
+            query
+          )}&per_page=${per_page}`
+        )
+        const videosData = await videosResponse.json()
+        const combinedMedia: Media[] = [
+          ...videosData.videos.map((video: Video, index: number) => ({
+            id: video.id,
+            title: dummies[index]?.title ?? '',
+            description: dummies[index]?.description ?? '',
+            duration: formatDuration(video.duration),
+            image: video.image,
+            url: video.url,
+            views: `${(Math.random() * 9 + 1).toFixed(1)}k`,
+            author: video.user.name,
+          })),
+        ]
+        setAnimeVideos(combinedMedia)
+      } catch (error) {
+        console.error('Error fetching from Pexels:', error)
+        setAnimeVideos([null])
+      } finally {
+        setLoading(false)
+      }
+    }
 
     fetchPexelsMedia()
+    fetchAnimeMedia()
   }, [])
 
   const formatDuration = (seconds: number) => {
@@ -178,8 +210,8 @@ export default function HomePage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
-        <HeroCarousel />
-        <TracingBeam className="px-6">
+        <div className="container mx-auto px-4 py-8 space-y-12">
+          <HeroCarousel />
           <ContinueWatchingSection />
           <VideoSection
             title="Trending Now"
@@ -187,10 +219,12 @@ export default function HomePage() {
           />
           <CategorySection categories={categories} />
           <VideoSection
-            title="Trending Now"
-            videos={trendingVideos.filter((v): v is Media => v !== null)}
+            title="Best of Art & Animation"
+            videos={animeVideos.filter((v): v is Media => v !== null)}
           />
-        </TracingBeam>
+        </div>
+        {/* <TracingBeam className="px-6">
+        </TracingBeam> */}
       </main>
     </div>
   )

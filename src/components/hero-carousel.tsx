@@ -75,10 +75,6 @@ export function HeroCarousel() {
     fetchPexelsMedia()
   }, [])
 
-  useEffect(() => {
-    console.log('Featured Media:', featuredMedia)
-  }, [featuredMedia])
-
   const formatDuration = (seconds: number) => {
     if (!seconds) return '00:00'
     const minutes = Math.floor(seconds / 60)

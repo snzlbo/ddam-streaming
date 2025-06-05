@@ -36,5 +36,5 @@ export interface Media extends Video {
   title: string
   description: string
   uploadedAt?: string
-  views?: number
+  views?: string
 }
