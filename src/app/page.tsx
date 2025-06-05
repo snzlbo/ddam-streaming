@@ -3,7 +3,6 @@ import { CategorySection } from '@/components/category-section'
 import { ContinueWatchingSection } from '@/components/continue-watching-section'
 import { Header } from '@/components/header'
 import { HeroCarousel } from '@/components/hero-carousel'
-import { TracingBeam } from '@/components/ui/tracing-beam'
 import { VideoSection } from '@/components/video-section'
 import { Media, Video } from '@/types/video'
 import {
@@ -129,12 +128,10 @@ const dummies = [
 export default function HomePage() {
   const [trendingVideos, setTrendingVideos] = useState<Array<Media | null>>([])
   const [animeVideos, setAnimeVideos] = useState<Array<Media | null>>([])
-  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const fetchPexelsMedia = async () => {
       try {
-        setLoading(true)
         const query = 'anime' // or any dynamic value you want
         const per_page = 5 // or any dynamic value you want
         const videosResponse = await fetch(
@@ -159,13 +156,10 @@ export default function HomePage() {
       } catch (error) {
         console.error('Error fetching from Pexels:', error)
         setTrendingVideos([null])
-      } finally {
-        setLoading(false)
       }
     }
     const fetchAnimeMedia = async () => {
       try {
-        setLoading(true)
         const query = 'art' // or any dynamic value you want
         const per_page = 5 // or any dynamic value you want
         const videosResponse = await fetch(
@@ -190,8 +184,6 @@ export default function HomePage() {
       } catch (error) {
         console.error('Error fetching from Pexels:', error)
         setAnimeVideos([null])
-      } finally {
-        setLoading(false)
       }
     }
 

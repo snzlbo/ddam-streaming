@@ -1,22 +1,13 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-import { Button } from '@/components/ui/button'
-import { Badge } from '@/components/ui/badge'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import {
-  ThumbsUp,
-  ThumbsDown,
-  Share,
-  Download,
-  Flag,
-  ChevronDown,
-  ChevronUp,
-} from 'lucide-react'
+import { Badge } from '@/components/ui/badge'
+import { Button } from '@/components/ui/button'
 import { Media } from '@/types/video'
+import { Download, Flag, Share, ThumbsDown, ThumbsUp } from 'lucide-react'
+import { useEffect, useState } from 'react'
 
 export function VideoDetails({ videoData }: { videoData: Media }) {
-  const [isDescriptionExpanded, setIsDescriptionExpanded] = useState(false)
   const [isSubscribed, setIsSubscribed] = useState(false)
   const [likes, setLikes] = useState(12543)
   const [dislikes, setDislikes] = useState(234)

@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { Play, Plus } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import Autoplay from 'embla-carousel-autoplay'
+import type { EmblaCarouselType } from 'embla-carousel'
 import { Media, Video } from '@/types/video'
 import {
   Carousel,
@@ -18,7 +19,7 @@ import { cn } from '@/lib/utils'
 export function HeroCarousel() {
   const [featuredMedia, setFeaturedMedia] = useState<Array<Media | null>>([])
   const [loading, setLoading] = useState(true)
-  const [api, setApi] = useState<any>()
+  const [api, setApi] = useState<EmblaCarouselType | undefined>()
   const [current, setCurrent] = useState(0)
 
   useEffect(() => {
