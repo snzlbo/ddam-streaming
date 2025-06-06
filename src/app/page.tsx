@@ -202,8 +202,8 @@ export default function HomePage() {
     <div className="min-h-screen bg-background">
       <Header />
       <main>
+        <HeroCarousel />
         <div className="container mx-auto px-4 py-8 space-y-12">
-          <HeroCarousel />
           <ContinueWatchingSection />
           <VideoSection
             title="Trending Now"
